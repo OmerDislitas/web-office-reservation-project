@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Offices - Admin Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .header { background-color: #333; color: white; padding: 20px; margin-bottom: 20px; }
+        .container { background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 3px; }
+        .btn { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        .btn:hover { background-color: #0056b3; }
+        .btn-danger { background-color: #dc3545; }
+        .btn-danger:hover { background-color: #c82333; }
+        .btn-success { background-color: #28a745; }
+        .btn-success:hover { background-color: #218838; }
+        .office-list { margin-top: 30px; }
+        .office-item { border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 3px; }
+        .actions { margin-top: 10px; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #007bff; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Manage Offices</h1>
+    <p>Admin Panel</p>
+</div>
+
+<div class="container">
+    <a href="/admin" class="back-link">← Back to Dashboard</a>
+    
+    <h2>Add New Office</h2>
+    <form action="/api/offices" method="post">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="pricePerMonth">Price per Month:</label>
+            <input type="number" id="pricePerMonth" name="pricePerMonth" step="0.01" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="sizeInSqm">Size (sqm):</label>
+            <input type="number" id="sizeInSqm" name="sizeInSqm" required>
+        </div>
+        
+        <button type="submit" class="btn btn-success">Add Office</button>
+    </form>
+    
+    <div class="office-list">
+        <h2>Existing Offices</h2>
+        <div th:if="${offices != null and !offices.empty}">
+            <div th:each="office : ${offices}" class="office-item">
+                <h3 th:text="${office.title}">Office Title</h3>
+                <p><strong>City:</strong> <span th:text="${office.city}">City</span></p>
+                <p><strong>Address:</strong> <span th:text="${office.address}">Address</span></p>
+                <p><strong>Price:</strong> $<span th:text="${#numbers.formatDecimal(office.pricePerMonth, 1, 2)}">0.00</span>/month</p>
+                <p><strong>Size:</strong> <span th:text="${office.sizeInSqm}">0</span> sqm</p>
+                
+                <div class="actions">
+                    <!-- In a real implementation, you would have edit functionality here -->
+                    <form th:action="@{'/api/offices/' + ${office.id}}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this office?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div th:if="${offices == null or offices.empty}">
+            <p>No offices found.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

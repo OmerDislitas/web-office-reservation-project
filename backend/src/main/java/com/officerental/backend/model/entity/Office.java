@@ -33,6 +33,7 @@ public class Office {
     private Double longitude;
 
     @ManyToOne
+    
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 

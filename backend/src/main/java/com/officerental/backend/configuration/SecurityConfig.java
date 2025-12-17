@@ -3,6 +3,7 @@ package com.officerental.backend.configuration;
 import com.officerental.backend.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,33 +21,44 @@ public class SecurityConfig {
     }
 
     @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    http
-            .csrf(csrf -> csrf.disable())
-            .userDetailsService(customUserDetailsService)
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/auth/register").permitAll()
-                    .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+        http
+                .csrf(csrf -> csrf.disable())
+                .userDetailsService(customUserDetailsService)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/login").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/logout").permitAll()
+                        .requestMatchers("/api/auth/register").permitAll()
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/logout").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
 
-                    // Sadece ADMIN erişsin:
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/reservations/pending").hasRole("ADMIN")
+                        .requestMatchers("/api/reservations/*/approve").hasRole("ADMIN")
+                        .requestMatchers("/api/reservations/*/reject").hasRole("ADMIN")
+                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/reservations").authenticated()
+                        // OFFICES API:
+                        .requestMatchers(HttpMethod.GET, "/api/offices/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/offices/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/offices/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/offices/**").hasRole("ADMIN")
 
-                    // Şimdilik diğer her yer login gerektirsin:
-                    .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                    .defaultSuccessUrl("/admin", true)
-                    .permitAll()
-            )
-            .logout(logout -> logout
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login?logout").permitAll()
-            );
+                        // Sadece ADMIN erişsin:
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
 
-    return http.build();
-}
+                        // Şimdilik diğer her yer login gerektirsin:
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/admin", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout").permitAll());
 
+        return http.build();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -58,4 +70,5 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
 }

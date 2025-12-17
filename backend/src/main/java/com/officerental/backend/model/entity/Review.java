@@ -28,5 +28,21 @@ public class Review {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // getters & setters
-    // ...
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Office getOffice() { return office; }
+    public void setOffice(Office office) { this.office = office; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public int getRating() { return rating; }
+    public void setRating(int rating) { this.rating = rating; }
+
+    public String getComment() { return comment; }
+    public void setComment(String comment) { this.comment = comment; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

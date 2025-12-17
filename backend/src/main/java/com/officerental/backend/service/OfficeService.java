@@ -1,18 +1,24 @@
 package com.officerental.backend.service;
 
 import com.officerental.backend.model.entity.Office;
+import com.officerental.backend.model.entity.User;
 import com.officerental.backend.repository.OfficeRepository;
+import com.officerental.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 
 @Service
 public class OfficeService {
 
     private final OfficeRepository officeRepository;
+    private final UserRepository userRepository;
 
-    public OfficeService(OfficeRepository officeRepository) {
+    public OfficeService(OfficeRepository officeRepository, UserRepository userRepository) {
         this.officeRepository = officeRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Office> getAll() {
@@ -24,7 +30,10 @@ public class OfficeService {
                 .orElseThrow(() -> new RuntimeException("Office not found with id: " + id));
     }
 
-    public Office create(Office office) {
+    public Office create(Office office, String ownerEmail) {
+        User owner = userRepository.findByEmail(ownerEmail)
+                .orElseThrow(() -> new RuntimeException("Owner not found"));
+        office.setOwner(owner);
         return officeRepository.save(office);
     }
 
@@ -46,6 +55,10 @@ public class OfficeService {
 
     public void delete(Long id) {
         officeRepository.deleteById(id);
+    }
+
+    public List<Office> search(String city, BigDecimal minPrice, BigDecimal maxPrice, Integer minSize, Integer maxSize) {
+        return officeRepository.search(city, minPrice, maxPrice, minSize, maxSize);
     }
 }
 
