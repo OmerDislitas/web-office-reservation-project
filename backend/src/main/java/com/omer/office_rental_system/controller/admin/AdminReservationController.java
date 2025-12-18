@@ -1,6 +1,7 @@
 package com.omer.office_rental_system.controller.admin;
 
 import com.omer.office_rental_system.entity.Reservation;
+import com.omer.office_rental_system.service.AdminManagementService;
 import com.omer.office_rental_system.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,18 @@ public class AdminReservationController {
     public String list(Model model) {
         List<Reservation> reservations = reservationService.getAllReservations();
         model.addAttribute("reservations", reservations);
+        model.addAttribute("title", "Pending Reservations");
+        model.addAttribute("backUrl", "/admin");
+
         return "admin-reservations";
     }
 
+    private final AdminManagementService adminManagementService;
+
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
-        reservationService.deleteReservation(id);
+        adminManagementService.deleteReservation(id);
         return "redirect:/admin/reservations";
     }
+
 }

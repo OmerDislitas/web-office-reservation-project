@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="adminHeader">
+  <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;padding:10px 0;margin-bottom:14px;">
+    <div style="min-width:120px;">
+      <a th:href="${backUrl}" style="text-decoration:none;">← Back</a>
+    </div>
+
+    <div style="display:flex;gap:14px;justify-content:center;flex:1;">
+      <a href="/admin/offices/pending">Pending Offices</a>
+      <a href="/admin/reservations">All Reservations</a>
+      <a href="/admin/offices">Offices</a>
+      <a href="/admin/users">Users</a>
+    </div>
+
+    <div style="min-width:220px;text-align:right;">
+      <b th:text="${title}">Title</b>
+    </div>
+  </div>
+</div>
+</body>
+</html>
