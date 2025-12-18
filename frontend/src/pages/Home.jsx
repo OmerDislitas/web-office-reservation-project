@@ -52,11 +52,11 @@ export default function Home({ onGoMyReservations }) {
     <div className="home-container">
       <div className="topbar">
         <div>
-          <div className="topbar-brand">Office Rental System</div>
+          <div className="topbar-brand">Office Rental Shop</div>
           <div className="topbar-user">Logged in as: {user?.email}</div>
         </div>
         <div className="topbar-actions">
-          <button onClick={onGoMyReservations}>My Reservations</button>
+          <button className="btn-primary" onClick={onGoMyReservations}>My Reservations</button>
 
           <button className="btn-primary" onClick={() => setCreateOpen(true)}>Create office reservation</button>
           <button className="btn-secondary" onClick={logout}>Logout</button>

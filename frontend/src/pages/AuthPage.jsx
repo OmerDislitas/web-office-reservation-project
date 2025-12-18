@@ -3,24 +3,39 @@ import Register from "./Register";
 
 export default function AuthPage({ onLoggedIn }) {
   return (
-    <div className="home-container">
-      <h1 style={{ textAlign: 'center', marginBottom: 40, fontWeight: 800 }}>Office Rental Store</h1>
-      
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 30 }}>
-        {/* CSS sınıfları sayesinde card objesine gerek kalmadı */}
-        <div className="auth-card">
-          <Login onGoRegister={() => {}} onLoggedIn={onLoggedIn} />
-        </div>
-        <div className="auth-card">
-          <Register onGoLogin={() => {}} />
+    <div style={{ 
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '40px 20px'
+    }}>
+      <div style={{ maxWidth: '900px', width: '100%' }}>
+        <h1 style={{ 
+          textAlign: 'center', 
+          marginBottom: '48px', 
+          fontWeight: 700,
+          fontSize: '36px',
+          color: '#ffffff',
+          letterSpacing: '-0.5px'
+        }}>
+          Office Rental Store
+        </h1>
+        
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: '1fr 1fr', 
+          gap: '32px'
+        }}>
+          <div style={{ background: '#ffffff', borderRadius: '16px', padding: '0' }}>
+            <Login onGoRegister={() => {}} onLoggedIn={onLoggedIn} />
+          </div>
+          <div style={{ background: '#ffffff', borderRadius: '16px', padding: '0' }}>
+            <Register onGoLogin={() => {}} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-const card = {
-  border: "1px solid #ddd",
-  borderRadius: 10,
-  padding: 12,
-};

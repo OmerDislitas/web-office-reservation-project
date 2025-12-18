@@ -20,32 +20,47 @@ export default function MyReservations({ onBack }) {
     }, []);
 
     return (
-        <div style={{ maxWidth: 980, margin: "20px auto", padding: "0 12px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <h2>My Reservations</h2>
-                <button onClick={onBack}>Back</button>
+        <div className="home-container">
+            <div className="topbar">
+                <h2 style={{ margin: 0 }}>My Reservations</h2>
+                <button className="btn-secondary" onClick={onBack}>Back to Home</button>
             </div>
 
-            {err && <p style={{ color: "crimson" }}>{err}</p>}
+            {err && <div className="error-message">{err}</div>}
 
-            <div style={{ display: "grid", gap: 10 }}>
-                {items.length === 0 && <p>No reservations yet.</p>}
+            <div className="offices-grid">
+                {items.length === 0 && (
+                    <div className="reviews-empty" style={{ gridColumn: '1 / -1', padding: '48px 24px' }}>
+                        No reservations yet.
+                    </div>
+                )}
 
                 {items.map((r) => (
-                    <div key={r.id} className="reservation-card">
-                        <div><b>Office:</b> {r.officeName}</div>
-                        <div><b>Date:</b> {r.startDate} → {r.endDate} ({r.totalDays} days)</div>
-                        <div><b>Total:</b> <span style={{ color: 'var(--primary)', fontWeight: 700 }}>{r.totalPrice}</span></div>
-                        {r.status && <div className="review-rating" style={{ marginTop: 5 }}>{r.status}</div>}
+                    <div key={r.id} className="office-card">
+                        <h3 className="office-title">{r.officeName}</h3>
+                        <div className="office-address">
+                            {r.startDate} → {r.endDate} ({r.totalDays} days)
+                        </div>
+                        <div className="office-price">
+                            <span className="office-price-amount">${r.totalPrice}</span>
+                        </div>
+                        {r.status && (
+                            <div style={{ 
+                                marginTop: '12px', 
+                                padding: '6px 12px', 
+                                background: '#f0fff4', 
+                                color: '#38a169',
+                                borderRadius: '6px',
+                                fontSize: '13px',
+                                fontWeight: '600',
+                                textAlign: 'center'
+                            }}>
+                                {r.status}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
         </div>
     );
 }
-
-const card = {
-    border: "1px solid #ddd",
-    borderRadius: 10,
-    padding: 12,
-};
