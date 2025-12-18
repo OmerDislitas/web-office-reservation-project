@@ -50,41 +50,25 @@ export default function ReserveModal({ office, open, onClose, onDone }) {
 
 
   return (
-    <div style={overlay}>
-      <div style={modal}>
-        <h3>Reserve — {office.name}</h3>
+    <div className="modal-overlay">
+      <div className="modal">
+        <h3 className="modal-title">Reserve — {office.name}</h3>
 
-        {err && <p style={{ color: "crimson" }}>{err}</p>}
+        {err && <div className="error-message">{err}</div>}
 
-        <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-          <button onClick={reserve} disabled={busy}>
-            {busy ? "..." : "Finish"}
-          </button>
+        <div className="modal-row" style={{ marginBottom: 20 }}>
+          <input className="modal-input" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+          <input className="modal-input" type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
         </div>
 
-        <div style={{ textAlign: "right" }}>
-          <button onClick={onClose}>Close</button>
+        <div className="modal-actions">
+          <button className="btn-secondary" onClick={onClose}>Close</button>
+          <button className="btn-primary" onClick={reserve} disabled={busy}>
+            {busy ? "..." : "Finish"}
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-const overlay = {
-  position: "fixed",
-  inset: 0,
-  background: "rgba(0,0,0,0.35)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: 16,
-};
-
-const modal = {
-  background: "white",
-  width: "min(520px, 100%)",
-  borderRadius: 10,
-  padding: 16,
-};

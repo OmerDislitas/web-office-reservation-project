@@ -34,59 +34,44 @@ export default function ReviewsModal({ office, open, onClose }) {
   }
 
   return (
-    <div style={overlay}>
-      <div style={modal}>
-        <h3>Reviews — {office.name}</h3>
+    <div className="modal-overlay">
+      <div className="modal modal-wide">
+        <h3 className="modal-title">Reviews — {office.name}</h3>
 
-        {err && <p style={{ color: "crimson" }}>{err}</p>}
+        {err && <div className="error-message">{err}</div>}
 
-        <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-          <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+        <div className="modal-row" style={{ marginBottom: 20 }}>
+          <select className="modal-input" value={rating} onChange={(e) => setRating(Number(e.target.value))}>
             {[5, 4, 3, 2, 1].map((n) => (
               <option key={n} value={n}>
-                {n}
+                {n} Stars
               </option>
             ))}
           </select>
           <input
+            className="modal-input"
             placeholder="Write a comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            style={{ flex: 1, padding: 8 }}
           />
-          <button onClick={add}>Add</button>
+          <button className="btn-primary btn-small" onClick={add}>Add</button>
         </div>
 
-        <div style={{ maxHeight: 260, overflow: "auto", border: "1px solid #ddd", padding: 10 }}>
-          {items.length === 0 && <p>No reviews yet.</p>}
+        <div className="reviews-container">
+          {items.length === 0 && <div className="reviews-empty">No reviews yet.</div>}
           {items.map((r) => (
-            <div key={r.id} style={{ borderBottom: "1px solid #eee", padding: "8px 0" }}>
-              <b>{r.rating}/5</b> — {r.comment}
+            <div key={r.id} className="review-item">
+              <span className="review-rating">{r.rating}/5</span>
+              <div className="review-comment">{r.comment}</div>
             </div>
           ))}
         </div>
 
-        <div style={{ marginTop: 12, textAlign: "right" }}>
-          <button onClick={onClose}>Close</button>
+        <div className="modal-actions">
+          <button className="btn-secondary" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>
   );
 }
 
-const overlay = {
-  position: "fixed",
-  inset: 0,
-  background: "rgba(0,0,0,0.35)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: 16,
-};
-
-const modal = {
-  background: "white",
-  width: "min(720px, 100%)",
-  borderRadius: 10,
-  padding: 16,
-};

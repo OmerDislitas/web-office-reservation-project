@@ -23,38 +23,36 @@ export default function Login({ onGoRegister, onLoggedIn }) {
   }
 
   return (
-    <div style={{ maxWidth: 420, margin: "40px auto" }}>
-      <h2>Login</h2>
-      {err && <p style={{ color: "crimson" }}>{err}</p>}
-      <form onSubmit={submit}>
-        <div style={{ marginBottom: 10 }}>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2 className="auth-title">Login</h2>
+        {err && <div className="auth-error">{err}</div>}
+        <form className="auth-form" onSubmit={submit}>
           <input
+            className="auth-input"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: 10 }}
           />
-        </div>
-        <div style={{ marginBottom: 10 }}>
           <input
+            className="auth-input"
             placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: 10 }}
           />
-        </div>
-        <button disabled={busy} style={{ padding: 10, width: "100%" }}>
-          {busy ? "..." : "Login"}
-        </button>
-      </form>
+          <button className="auth-button" disabled={busy}>
+            {busy ? "..." : "Login"}
+          </button>
+        </form>
 
-      <p style={{ marginTop: 12 }}>
-        No account?{" "}
-        <button onClick={onGoRegister} style={{ border: "none", background: "none", color: "blue", cursor: "pointer" }}>
-          Register
-        </button>
-      </p>
+        <div className="auth-footer">
+          No account?{" "}
+          <button onClick={onGoRegister} className="auth-link">
+            Register
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

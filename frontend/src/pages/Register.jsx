@@ -29,40 +29,34 @@ export default function Register({ onGoLogin }) {
   }
 
   return (
-    <div style={{ maxWidth: 420, margin: "40px auto" }}>
-      <h2>Register</h2>
-      {err && <p style={{ color: "crimson" }}>{err}</p>}
-      {ok && <p style={{ color: "green" }}>{ok}</p>}
-      <form onSubmit={submit}>
-        <div style={{ marginBottom: 10 }}>
-          <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} style={{ width: "100%", padding: 10 }} />
-        </div>
-        <div style={{ marginBottom: 10 }}>
-          <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: "100%", padding: 10 }} />
-        </div>
-        <div style={{ marginBottom: 10 }}>
-          <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: "100%", padding: 10 }} />
-        </div>
-        <div style={{ marginBottom: 10 }}>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2 className="auth-title">Register</h2>
+        {err && <div className="auth-error">{err}</div>}
+        {ok && <div className="auth-success">{ok}</div>}
+        <form className="auth-form" onSubmit={submit}>
+          <input className="auth-input" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+          <input className="auth-input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input className="auth-input" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <input
+            className="auth-input"
             placeholder="Confirm Password"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            style={{ width: "100%", padding: 10 }}
           />
-        </div>
-        <button disabled={busy} style={{ padding: 10, width: "100%" }}>
-          {busy ? "..." : "Create account"}
-        </button>
-      </form>
+          <button className="auth-button" disabled={busy}>
+            {busy ? "..." : "Create account"}
+          </button>
+        </form>
 
-      <p style={{ marginTop: 12 }}>
-        Have an account?{" "}
-        <button onClick={onGoLogin} style={{ border: "none", background: "none", color: "blue", cursor: "pointer" }}>
-          Login
-        </button>
-      </p>
+        <div className="auth-footer">
+          Have an account?{" "}
+          <button onClick={onGoLogin} className="auth-link">
+            Login
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
