@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.List;
+import java.util.List;
+
 
 public interface ReservationRepo extends JpaRepository<Reservation, Long> {
-
+    List<Reservation> findByUserIdOrderByStartDateDesc(Long userId);
     List<Reservation> findByOfficeId(Long officeId);
 
     List<Reservation> findByUserId(Long userId);

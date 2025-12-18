@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useAuth } from "./auth/AuthContext";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import AuthPage from "./pages/AuthPage";
 import Home from "./pages/Home";
+import MyReservations from "./pages/MyReservations";
 
 export default function App() {
   const { user, loading } = useAuth();
-  const [mode, setMode] = useState("login"); // login | register
+  const [page, setPage] = useState("home"); // home | myres
 
   if (loading) return <div style={{ padding: 20 }}>Loading...</div>;
 
   if (!user) {
-    if (mode === "register") {
-      return <Register onGoLogin={() => setMode("login")} />;
-    }
-    return <Login onGoRegister={() => setMode("register")} onLoggedIn={() => {}} />;
+    return <AuthPage onLoggedIn={() => setPage("home")} />;
   }
 
-  return <Home />;
+  if (page === "myres") {
+    return <MyReservations onBack={() => setPage("home")} />;
+  }
+
+  return <Home onGoMyReservations={() => setPage("myres")} />;
 }

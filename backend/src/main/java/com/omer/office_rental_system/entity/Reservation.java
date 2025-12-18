@@ -21,6 +21,9 @@ public class Reservation {
 
     @ManyToOne
     private User user;
+    
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 
     private LocalDate startDate;
     private LocalDate endDate;

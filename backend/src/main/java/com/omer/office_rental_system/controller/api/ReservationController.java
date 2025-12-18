@@ -3,6 +3,8 @@ package com.omer.office_rental_system.controller.api;
 import com.omer.office_rental_system.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import com.omer.office_rental_system.dto.reservation.MyReservationResponse;
+import java.util.List;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -12,6 +14,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ReservationController {
 
+@GetMapping("/mine")
+public List<MyReservationResponse> mine() {
+    return reservationService.getMyReservations();
+}
     private final ReservationService reservationService;
 
     @PostMapping

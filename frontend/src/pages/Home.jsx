@@ -3,7 +3,7 @@ import { apiFetch } from "../api/client";
 import { useAuth } from "../auth/AuthContext";
 import OfficeCard from "../components/OfficeCard";
 
-export default function Home() {
+export default function Home({ onGoMyReservations }) {
   const { user, logout } = useAuth();
   const [q, setQ] = useState("");
   const [items, setItems] = useState([]);
@@ -56,6 +56,8 @@ export default function Home() {
           <div className="topbar-user">Logged in as: {user?.email}</div>
         </div>
         <div className="topbar-actions">
+          <button onClick={onGoMyReservations}>My Reservations</button>
+
           <button className="btn-primary" onClick={() => setCreateOpen(true)}>Create office reservation</button>
           <button className="btn-secondary" onClick={logout}>Logout</button>
         </div>

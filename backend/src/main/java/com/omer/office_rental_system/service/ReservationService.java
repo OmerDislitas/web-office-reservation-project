@@ -1,5 +1,8 @@
 package com.omer.office_rental_system.service;
 
+import com.omer.office_rental_system.dto.reservation.MyReservationResponse;
+import java.util.stream.Collectors;
+
 import com.omer.office_rental_system.entity.*;
 import com.omer.office_rental_system.exception.ConflictException;
 import com.omer.office_rental_system.repo.OfficeRepo;
@@ -14,6 +17,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -51,6 +55,7 @@ public class ReservationService {
         r.setEndDate(end);
         r.setTotalDays((int) days);
         r.setTotalPrice(totalPrice);
+        r.setStatus(ReservationStatus.APPROVED);
 
         reservationRepo.save(r);
         Reservation saved = reservationRepo.save(r);
@@ -61,12 +66,29 @@ public class ReservationService {
         return reservationRepo.findAll();
     }
 
-    
+    @Transactional
+    public void deleteReservation(Long id) {
+        paymentRepo.findByReservationId(id).ifPresent(paymentRepo::delete);
+        reservationRepo.deleteById(id);
+    }
 
-@Transactional
-public void deleteReservation(Long id) {
-    paymentRepo.findByReservationId(id).ifPresent(paymentRepo::delete);
-    reservationRepo.deleteById(id);
-}
+    public java.util.List<MyReservationResponse> getMyReservations() {
+        String email = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication().getName();
 
+        User user = userRepo.findByEmail(email).orElseThrow();
+
+        return reservationRepo.findByUserIdOrderByStartDateDesc(user.getId())
+                .stream()
+                .map(r -> new MyReservationResponse(
+                        r.getId(),
+                        r.getOffice().getId(),
+                        r.getOffice().getName(),
+                        r.getStartDate(),
+                        r.getEndDate(),
+                        r.getTotalDays(),
+                        r.getTotalPrice(),
+                        r.getStatus() == null ? null : r.getStatus().name()))
+                .collect(Collectors.toList());
+    }
 }

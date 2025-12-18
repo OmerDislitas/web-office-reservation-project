@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/reviews/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/reviews").authenticated()
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/payments").authenticated()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/reservations/mine").authenticated()
 
                         // auth endpoints public
                         .requestMatchers("/api/auth/**").permitAll()
