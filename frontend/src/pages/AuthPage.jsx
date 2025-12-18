@@ -3,14 +3,15 @@ import Register from "./Register";
 
 export default function AuthPage({ onLoggedIn }) {
   return (
-    <div style={{ maxWidth: 980, margin: "24px auto", padding: "0 12px" }}>
-      <h1 style={{ marginBottom: 18 }}>Office Rental Store</h1>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-        <div style={card}>
+    <div className="home-container">
+      <h1 style={{ textAlign: 'center', marginBottom: 40, fontWeight: 800 }}>Office Rental Store</h1>
+      
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 30 }}>
+        {/* CSS sınıfları sayesinde card objesine gerek kalmadı */}
+        <div className="auth-card">
           <Login onGoRegister={() => {}} onLoggedIn={onLoggedIn} />
         </div>
-        <div style={card}>
+        <div className="auth-card">
           <Register onGoLogin={() => {}} />
         </div>
       </div>

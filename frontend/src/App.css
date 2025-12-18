@@ -1,41 +1,179 @@
-#root {
+/* --- Global Form Elemanları --- */
+.auth-input, .modal-input, select.modal-input {
   width: 100%;
-  margin: 0;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fcfcfd;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.auth-input:focus, .modal-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* --- AuthPage, Login & Register --- */
+.auth-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-main);
+  text-align: center;
+}
+
+.auth-button {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  padding: 14px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.auth-link {
+  background: none;
+  color: var(--primary);
   padding: 0;
+  font-weight: 600;
+  text-decoration: underline;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.auth-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.auth-success {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* --- OfficeCard Spesifik --- */
+.office-address {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 15px;
 }
 
-.card {
-  padding: 2em;
+.office-price {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
 }
 
-.read-the-docs {
-  color: #888;
+.office-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-card {
+  flex: 1;
+  font-size: 0.85rem;
+  padding: 10px 5px;
+}
+
+.btn-reserve {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-reviews {
+  background: #f1f5f9;
+  color: var(--text-main);
+}
+
+/* --- Reviews & Modals --- */
+.modal-wide {
+  max-width: 650px;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.modal-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.reviews-container {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 20px 0;
+  padding-right: 10px;
+}
+
+.review-item {
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.review-rating {
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.review-comment {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* --- Search Bar --- */
+.search-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.search-input {
+  flex: 1;
+  margin-bottom: 0; /* Override */
+}
+
+/* --- MyReservations List --- */
+.reservation-card {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid transparent;
+  transition: border 0.2s;
+}
+
+.reservation-card:hover {
+  border-color: var(--primary);
 }
