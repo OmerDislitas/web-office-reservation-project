@@ -11,7 +11,7 @@ export default function AuthPage({ onLoggedIn }) {
       justifyContent: 'center',
       padding: '40px 20px'
     }}>
-      <div style={{ maxWidth: '900px', width: '100%' }}>
+      <div style={{ maxWidth: '960px', width: '100%' }}>
         <h1 style={{ 
           textAlign: 'center', 
           marginBottom: '48px', 
@@ -23,15 +23,11 @@ export default function AuthPage({ onLoggedIn }) {
           Office Rental Store
         </h1>
         
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: '1fr 1fr', 
-          gap: '32px'
-        }}>
-          <div style={{ background: '#ffffff', borderRadius: '16px', padding: '0' }}>
+        <div className="auth-grid">
+          <div style={{ background: '#ffffff', borderRadius: '16px', overflow: 'hidden' }}>
             <Login onGoRegister={() => {}} onLoggedIn={onLoggedIn} />
           </div>
-          <div style={{ background: '#ffffff', borderRadius: '16px', padding: '0' }}>
+          <div style={{ background: '#ffffff', borderRadius: '16px', overflow: 'hidden' }}>
             <Register onGoLogin={() => {}} />
           </div>
         </div>

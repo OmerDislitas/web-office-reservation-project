@@ -23,35 +23,33 @@ export default function Login({ onGoRegister, onLoggedIn }) {
   }
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2 className="auth-title">Login</h2>
-        {err && <div className="auth-error">{err}</div>}
-        <form className="auth-form" onSubmit={submit}>
-          <input
-            className="auth-input"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            className="auth-input"
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button className="auth-button" disabled={busy}>
-            {busy ? "..." : "Login"}
-          </button>
-        </form>
+    <div className="auth-card">
+      <h2 className="auth-title">Login</h2>
+      {err && <div className="auth-error">{err}</div>}
+      <form className="auth-form" onSubmit={submit}>
+        <input
+          className="auth-input"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          className="auth-input"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className="auth-button" disabled={busy}>
+          {busy ? "..." : "Login"}
+        </button>
+      </form>
 
-        <div className="auth-footer">
-          No account?{" "}
-          <button onClick={onGoRegister} className="auth-link">
-            Register
-          </button>
-        </div>
+      <div className="auth-footer">
+        No account?{" "}
+        <button onClick={onGoRegister} className="auth-link">
+          Register
+        </button>
       </div>
     </div>
   );

@@ -30,6 +30,7 @@ body {
   padding: 48px 40px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   border: 1px solid #e8eaf0;
+  height: 100%;
 }
 
 .auth-title {
@@ -140,6 +141,12 @@ body {
 .auth-link:hover {
   color: #5a67d8;
   text-decoration: underline;
+}
+
+.auth-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
 }
 
 /* === Home Page === */
@@ -506,6 +513,11 @@ select.modal-input {
 @media (max-width: 768px) {
   .auth-card {
     padding: 32px 24px;
+  }
+
+  .auth-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .topbar {
