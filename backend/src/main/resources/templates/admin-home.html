@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,6 +69,22 @@
             border: 1px solid #e2e8f0;
             background: #f7fafc;
             transition: all 0.2s ease;
+        }
+
+        .selection {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .selection:hover {
+            background: #f7fafc;
+            border-color: #667eea;
         }
 
         .nav-link:hover {
@@ -222,6 +239,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="dashboard-shell">
         <div class="dashboard-card">
@@ -230,11 +248,7 @@
                     <div class="dashboard-title">Admin Panel</div>
                     <div class="dashboard-subtitle">Overview of revenue, offices, and users</div>
                 </div>
-                <div class="nav-links">
-                    <a href="/admin/offices/pending" class="nav-link">Pending Offices</a>
-                    <a href="/admin/reservations" class="nav-link">Reservations</a>
-                    <a href="/admin/users" class="nav-link">Users</a>
-                </div>
+
             </div>
 
             <div class="metrics-layout">
@@ -265,4 +279,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -20,7 +21,23 @@
             justify-content: center;
             padding: 20px;
         }
-        
+
+        .selection {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .selection:hover {
+            background: #f7fafc;
+            border-color: #667eea;
+        }
+
         .admin-container {
             background: #ffffff;
             border-radius: 16px;
@@ -29,7 +46,7 @@
             width: 100%;
             max-width: 440px;
         }
-        
+
         h2 {
             color: #1a202c;
             font-size: 28px;
@@ -38,13 +55,13 @@
             margin-bottom: 32px;
             letter-spacing: -0.5px;
         }
-        
+
         form {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-        
+
         input {
             width: 100%;
             padding: 14px 16px;
@@ -56,17 +73,17 @@
             transition: all 0.2s ease;
             font-family: inherit;
         }
-        
+
         input:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
+
         input::placeholder {
             color: #a0aec0;
         }
-        
+
         button {
             width: 100%;
             padding: 14px 20px;
@@ -81,16 +98,16 @@
             font-family: inherit;
             margin-top: 8px;
         }
-        
+
         button:hover {
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
         }
-        
+
         button:active {
             transform: translateY(0);
         }
-        
+
         .error-msg {
             color: #e53e3e;
             background: #fff5f5;
@@ -100,7 +117,7 @@
             border-left: 3px solid #e53e3e;
             margin-top: 16px;
         }
-        
+
         .success-msg {
             color: #38a169;
             background: #f0fff4;
@@ -112,18 +129,20 @@
         }
     </style>
 </head>
+
 <body>
     <div class="admin-container">
         <h2>Admin Login</h2>
-        
+
         <form th:action="@{/admin/login}" method="post">
-            <input name="username" placeholder="Email" required/>
-            <input type="password" name="password" placeholder="Password" required/>
+            <input name="username" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
             <button type="submit">Login</button>
         </form>
-        
+
         <p class="error-msg" th:if="${param.error}">Login failed. Please check your credentials.</p>
         <p class="success-msg" th:if="${param.logout}">You have been logged out successfully.</p>
     </div>
 </body>
+
 </html>

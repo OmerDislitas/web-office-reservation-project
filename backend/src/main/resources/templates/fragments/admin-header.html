@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <style>
         * {
@@ -25,6 +26,22 @@
             align-items: center;
             gap: 24px;
             margin-bottom: 32px;
+        }
+
+        .selection {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .selection:hover {
+            background: #f7fafc;
+            border-color: #667eea;
         }
 
         .admin-nav a {
@@ -111,6 +128,7 @@
         }
     </style>
 </head>
+
 <body>
     <div th:fragment="adminHeader">
         <div class="admin-nav">
@@ -124,4 +142,5 @@
         </div>
     </div>
 </body>
+
 </html>
