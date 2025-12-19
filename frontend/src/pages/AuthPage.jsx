@@ -7,7 +7,7 @@ export default function AuthPage({ onLoggedIn }) {
 
   useEffect(() => {
     // ZenQuotes API fetch
-    fetch("https://zenquotes.io/api/random")
+    fetch("https://web-office-reservation-project.onrender.com/api/quotes/random")
       .then((r) => r.json())
       .then((arr) => {
         const item = Array.isArray(arr) ? arr[0] : null;
