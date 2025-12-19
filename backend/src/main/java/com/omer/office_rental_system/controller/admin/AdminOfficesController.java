@@ -33,7 +33,7 @@ public class AdminOfficesController {
         List<Office> pending = officeRepo.findByStatus(OfficeStatus.PENDING);
         model.addAttribute("offices", pending);
 
-        return "admin-reservations";
+        return "admin-offices";
     }
 
     /**

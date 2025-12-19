@@ -63,9 +63,8 @@ public class ReservationService {
     }
 
     public List<Reservation> getAllReservations() {
-        return reservationRepo.findAll();
-    }
-
+    return reservationRepo.findAllWithOfficeAndUser();
+}
     @Transactional
     public void deleteReservation(Long id) {
         paymentRepo.findByReservationId(id).ifPresent(paymentRepo::delete);
