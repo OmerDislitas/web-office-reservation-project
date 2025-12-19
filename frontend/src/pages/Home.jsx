@@ -35,6 +35,18 @@ export default function Home({ onGoMyReservations }) {
 
   async function submitOffice() {
     setErr("");
+
+    const trimmed = {
+      name: newOffice.name.trim(),
+      description: newOffice.description.trim(),
+      address: newOffice.address.trim(),
+    };
+
+    if (!trimmed.name || !trimmed.description || !trimmed.address) {
+      setErr("Please fill in all fields before submitting.");
+      return;
+    }
+
     try {
       await apiFetch("/api/offices", {
         method: "POST",

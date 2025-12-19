@@ -8,6 +8,9 @@ export default function ReserveModal({ office, open, onClose, onDone }) {
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
 
+  const today = new Date();
+  const minDate = today.toISOString().split("T")[0];
+
   if (!open) return null;
 
   async function reserve() {
@@ -15,6 +18,11 @@ export default function ReserveModal({ office, open, onClose, onDone }) {
 
     if (!startDate || !endDate) {
       setErr("Pick start and end date");
+      return;
+    }
+
+    if (new Date(startDate) > new Date(endDate)) {
+      setErr("Start date cannot be after end date");
       return;
     }
 
@@ -59,12 +67,14 @@ export default function ReserveModal({ office, open, onClose, onDone }) {
             <input
               className="modal-input"
               type="date"
+              min={minDate}
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
             <input
               className="modal-input"
               type="date"
+              min={startDate || minDate}
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
