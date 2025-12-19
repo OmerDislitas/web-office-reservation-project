@@ -139,7 +139,8 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
         }
-.btn-approve {
+
+        .btn-approve {
             padding: 8px 16px;
             font-size: 13px;
             font-weight: 600;
@@ -156,6 +157,7 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(84, 210, 72, 0.3);
         }
+
         button:active {
             transform: translateY(0);
         }
@@ -224,13 +226,18 @@
                         <td th:text="${o.dailyPrice}"></td>
                         <td>
                             <div class="actions">
+                                <form th:action="@{/admin/offices/{id}/approve(id=${o.id})}" method="post"
+                                    style="display: inline;">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                    <button type="submit" class="btn-approve"
+                                        onclick="return confirm('Approve this office?')">Approve</button>
+                                </form>
+
                                 <form th:action="@{/admin/offices/{id}/delete(id=${o.id})}" method="post"
                                     style="display: inline;">
                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                     <button type="submit" class="btn-delete"
                                         onclick="return confirm('Delete office?')">Delete</button>
-                                    <button type="submit" class="btn-approve"
-                                        onclick="return confirm('Approve office?')">Approve</button>
                                 </form>
                             </div>
                         </td>
