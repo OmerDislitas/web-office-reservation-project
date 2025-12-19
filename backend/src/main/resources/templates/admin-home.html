@@ -82,6 +82,22 @@
             border: 1.5px solid #e2e8f0;
         }
 
+        .selection {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .selection:hover {
+            background: #f7fafc;
+            border-color: #667eea;
+        }
+
         .selection:hover {
             background: #f7fafc;
             border-color: #667eea;
@@ -248,7 +264,11 @@
                     <div class="dashboard-title">Admin Panel</div>
                     <div class="dashboard-subtitle">Overview of revenue, offices, and users</div>
                 </div>
-
+                <div style="flex: 1; display: flex; gap: 12px; justify-content: center;">
+                    <a href="/admin/offices/pending" class="selection">Pending Offices</a>
+                    <a href="/admin/reservations" class="selection">Reservations</a>
+                    <a href="/admin/users" class="selection">Users</a>
+                </div>
             </div>
 
             <div class="metrics-layout">
