@@ -227,17 +227,17 @@
                         <td>
                             <div class="actions">
                                 <form th:action="@{/admin/offices/{id}/approve(id=${o.id})}" method="post"
-                                    style="display: inline;">
+                                    style="display:inline;">
                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                     <button type="submit" class="btn-approve"
                                         onclick="return confirm('Approve this office?')">Approve</button>
                                 </form>
 
-                                <form th:action="@{/admin/offices/{id}/delete(id=${o.id})}" method="post"
-                                    style="display: inline;">
+                                <form th:action="@{/admin/offices/{id}/reject(id=${o.id})}" method="post"
+                                    style="display:inline;">
                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                     <button type="submit" class="btn-delete"
-                                        onclick="return confirm('Delete office?')">Delete</button>
+                                        onclick="return confirm('Reject this office?')">Reject</button>
                                 </form>
                             </div>
                         </td>
