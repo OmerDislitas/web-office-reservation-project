@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,14 +28,18 @@ public class AuthController {
 
     @PostMapping("/login")
     public void login(@Valid @RequestBody LoginRequest req,
-                      HttpServletRequest request,
-                      HttpServletResponse response) {
+            HttpServletRequest request,
+            HttpServletResponse response) {
         authService.login(req, request, response); // session cookie burada oluşacak
     }
 
     @GetMapping("/me")
-    public UserMeResponse me() {
-        return authService.me();
+    public ResponseEntity<UserMeResponse> me() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getName())) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(authService.me());
     }
 
     @PostMapping("/logout")

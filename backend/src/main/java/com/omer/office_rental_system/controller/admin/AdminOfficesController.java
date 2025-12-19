@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import com.omer.office_rental_system.service.OfficeService;
 @Controller
 @RequestMapping("/admin/offices")
 @RequiredArgsConstructor
@@ -14,7 +14,7 @@ public class AdminOfficesController {
 
     private final OfficeRepo officeRepo;
     private final AdminManagementService adminManagementService;
-
+    private final OfficeService officeService;
     @GetMapping
     public String list(Model model) {
         model.addAttribute("title", "Offices");
@@ -25,7 +25,11 @@ public class AdminOfficesController {
 
         return "admin-offices";
     }
-
+@PostMapping("/{id}/approve")
+    public String approve(@PathVariable Long id) {
+        officeService.approveOffice(id);
+        return "redirect:/admin/offices";
+    }
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
         adminManagementService.deleteOffice(id);
