@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactDOM from "react-dom";
 import { apiFetch } from "../api/client";
 
 export default function ReserveModal({ office, open, onClose, onDone }) {
@@ -46,7 +47,7 @@ export default function ReserveModal({ office, open, onClose, onDone }) {
     }
   }
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3 className="modal-title">Reserve — {office.name}</h3>
@@ -55,17 +56,17 @@ export default function ReserveModal({ office, open, onClose, onDone }) {
 
         <div className="modal-form">
           <div className="modal-row">
-            <input 
-              className="modal-input" 
-              type="date" 
-              value={startDate} 
-              onChange={(e) => setStartDate(e.target.value)} 
+            <input
+              className="modal-input"
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
             />
-            <input 
-              className="modal-input" 
-              type="date" 
-              value={endDate} 
-              onChange={(e) => setEndDate(e.target.value)} 
+            <input
+              className="modal-input"
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
         </div>
@@ -77,7 +78,8 @@ export default function ReserveModal({ office, open, onClose, onDone }) {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

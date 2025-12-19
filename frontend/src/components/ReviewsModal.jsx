@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { apiFetch } from "../api/client";
 
 export default function ReviewsModal({ office, open, onClose }) {
@@ -42,7 +43,7 @@ export default function ReviewsModal({ office, open, onClose }) {
     }
   }
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal modal-wide" onClick={(e) => e.stopPropagation()}>
         <h3 className="modal-title">Reviews — {office.name}</h3>
@@ -82,7 +83,8 @@ export default function ReviewsModal({ office, open, onClose }) {
           <button className="btn-secondary" onClick={onClose}>Close</button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
